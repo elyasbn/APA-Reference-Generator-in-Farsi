@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>APA Reference Generator in Farsi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Vazir:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Vazir', sans-serif;
+        }
+    </style>
+</head>
+<body class="flex flex-col min-h-screen">
+    <div class="flex-grow mr-5">
+        <h1 class="text-xl font-bold my-4"> ‌مرجع‌ساز APA</h1>
+        <div>
+            <label for="documentType" class="block mb-2">نوع سند:</label>
+            <select id="documentType" class="mb-4 p-2 border rounded">
+                <option value="default">انتخاب کنید</option>
+                <option value="book">کتاب</option>
+                <option value="journalArticle">مقاله ژورنال</option>
+                <option value="website">وب‌سایت</option>
+                <option value="dissertation">پایان‌نامه و رساله</option>
+                <option value="conferencePaper">مقاله کنفرانس</option>
+            </select>
+        </div>
+        <form id="referenceForm" class="mb-4">
+            <!-- Book Fields -->
+            <div id="bookFields" class="hidden">
+                <label>نام نویسنده:</label>
+                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
+                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
+                <label>عنوان کتاب:</label>
+                <input type="text" name="title" class="mb-4 p-2 border rounded block">
+                <label>سال انتشار:</label>
+                <input type="text" name="year" class="mb-4 p-2 border rounded block">
+                <label>مکان انتشار:</label>
+                <input type="text" name="location" class="mb-4 p-2 border rounded block">
+                <label>ناشر:</label>
+                <input type="text" name="publisher" class="mb-4 p-2 border rounded block">
+            </div>
+            <!-- Journal Article Fields -->
+            <div id="journalArticleFields" class="hidden">
+                <label>نام نویسنده:</label>
+                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
+                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
+                <label>عنوان مقاله:</label>
+                <input type="text" name="articleTitle" class="mb-4 p-2 border rounded block">
+                <label>نام ژورنال:</label>
+                <input type="text" name="journalName" class="mb-4 p-2 border rounded block">
+                <label>شماره و جلد ژورنال:</label>
+                <input type="text" name="volumeIssue" class="mb-4 p-2 border rounded block">
+                <label>سال و صفحات:</label>
+                <input type="text" name="yearPages" class="mb-4 p-2 border rounded block">
+            </div>
+            <!-- Website Fields -->
+            <div id="websiteFields" class="hidden">
+                <label>نام نویسنده یا سازمان:</label>
+                <input type="text" name="webAuthor" class="mb-4 p-2 border rounded block">
+                <label>عنوان صفحه:</label>
+                <input type="text" name="pageTitle" class="mb-4 p-2 border rounded block">
+                <label>نام وب‌سایت:</label>
+                <input type="text" name="websiteName" class="mb-4 p-2 border rounded block">
+                <label>تاریخ انتشار:</label>
+                <input type="text" name="publishDate" class="mb-4 p-2 border rounded block">
+                <label>URL:</label>
+                <input type="text" name="url" class="mb-4 p-2 border rounded block">
+            </div>
+            <!-- Dissertation Fields -->
+            <div id="dissertationFields" class="hidden">
+                <label>نام نویسنده:</label>
+                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
+                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
+                <label>عنوان پایان‌نامه یا رساله:</label>
+                <input type="text" name="thesisTitle" class="mb-4 p-2 border rounded block">
+                <label>سال انتشار:</label>
+                <input type="text" name="year" class="mb-4 p-2 border rounded block">
+                <label>دانشگاه:</label>
+                <input type="text" name="university" class="mb-4 p-2 border rounded block">
+            </div>
+            <!-- Conference Paper Fields -->
+            <div id="conferencePaperFields" class="hidden">
+                <label>نام نویسنده:</label>
+                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
+                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
+                <label>عنوان مقاله:</label>
+                <input type="text" name="paperTitle" class="mb-4 p-2 border rounded block">
+                <label>نام کنفرانس:</label>
+                <input type="text" name="conferenceName" class="mb-4 p-2 border rounded block">
+                <label>مکان برگزاری:</label>
+                <input type="text" name="location" class="mb-4 p-2 border rounded block">
+                <label>تاریخ برگزاری:</label>
+                <input type="text" name="date" class="mb-4 p-2 border rounded block">
+            </div>
+            <button id="generateButton" type="button" class="p-2 bg-blue-500 text-white rounded">ایجاد مرجع</button>
+        </form>
+        <!-- <div id="referenceOutput"></div> -->
+        <div id="referenceOutput" class="mt-4"></div>
+        <button id="copyButton" class="mt-2 p-2 bg-gray-200 rounded">کپی</button>
+    </div>
+    <footer class="bg-gray-200 text-center p-4 mt-8">
+        <p class="text-gray-700 text-sm">این نسخه 0.0.0 است. برای اطلاع از به‌روزرسانی‌ها در کانال تلگرام <a href="https://t.me/baladam_baladam">بلدم بلدم</a> عضو شوید.</p>
+    </footer>
+    
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
