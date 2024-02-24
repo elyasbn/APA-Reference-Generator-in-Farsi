@@ -20,9 +20,9 @@
                 <option value="default">انتخاب کنید</option>
                 <option value="book">کتاب</option>
                 <option value="journalArticle">مقاله ژورنال</option>
+                <option value="conferencePaper">مقاله کنفرانس</option>
                 <option value="website">وب‌سایت</option>
                 <option value="dissertation">پایان‌نامه و رساله</option>
-                <option value="conferencePaper">مقاله کنفرانس</option>
             </select>
         </div>
         <form id="referenceForm" class="mb-4">
@@ -35,7 +35,7 @@
                 <input type="text" name="title" class="mb-4 p-2 border rounded block">
                 <label>سال انتشار:</label>
                 <input type="text" name="year" class="mb-4 p-2 border rounded block">
-                <label>مکان انتشار:</label>
+                <label>محل انتشار:</label>
                 <input type="text" name="location" class="mb-4 p-2 border rounded block">
                 <label>ناشر:</label>
                 <input type="text" name="publisher" class="mb-4 p-2 border rounded block">
@@ -45,19 +45,22 @@
                 <label>نام نویسنده:</label>
                 <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
                 <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
+                <label>سال انتشار:</label>
+                <input type="text" name="year" class="mb-4 p-2 border rounded block">
                 <label>عنوان مقاله:</label>
                 <input type="text" name="articleTitle" class="mb-4 p-2 border rounded block">
                 <label>نام ژورنال:</label>
                 <input type="text" name="journalName" class="mb-4 p-2 border rounded block">
-                <label>شماره و جلد ژورنال:</label>
+                <label>شماره ژورنال:</label>
                 <input type="text" name="volumeIssue" class="mb-4 p-2 border rounded block">
-                <label>سال و صفحات:</label>
-                <input type="text" name="yearPages" class="mb-4 p-2 border rounded block">
+                <label>صفحات:</label>
+                <input type="text" name="pages" class="mb-4 p-2 border rounded block">
             </div>
             <!-- Website Fields -->
             <div id="websiteFields" class="hidden">
-                <label>نام نویسنده یا سازمان:</label>
-                <input type="text" name="webAuthor" class="mb-4 p-2 border rounded block">
+                <label>نام نویسنده:</label>
+                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
+                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
                 <label>عنوان صفحه:</label>
                 <input type="text" name="pageTitle" class="mb-4 p-2 border rounded block">
                 <label>نام وب‌سایت:</label>
@@ -74,6 +77,13 @@
                 <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
                 <label>عنوان پایان‌نامه یا رساله:</label>
                 <input type="text" name="thesisTitle" class="mb-4 p-2 border rounded block">
+                <div>
+                    <label for="dissertationType">نوع:</label>
+                    <select id="dissertationType" name="dissertationType">
+                        <option value="masterThesis">پایان‌نامه کارشناسی ارشد</option>
+                        <option value="doctoralDissertation">رساله دکتری</option>
+                    </select>
+                </div>
                 <label>سال انتشار:</label>
                 <input type="text" name="year" class="mb-4 p-2 border rounded block">
                 <label>دانشگاه:</label>
@@ -95,12 +105,25 @@
             </div>
             <button id="generateButton" type="button" class="p-2 bg-blue-500 text-white rounded">ایجاد مرجع</button>
         </form>
-        <!-- <div id="referenceOutput"></div> -->
-        <div id="referenceOutput" class="mt-4"></div>
-        <button id="copyButton" class="mt-2 p-2 bg-gray-200 rounded">کپی</button>
+        <div id="referenceOutput" class="hidden">
+            <p><strong>ارجاع درون‌متنی:</strong> <span id="inTextReferenceOutput"></span>
+                <button id="copyInTextReference" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+                    کپی
+                </button>
+            </p>
+            <p><strong>ارجاع پایانی:</strong> <span id="finalReferenceOutput"></span>
+                <button id="copyFinalReference" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
+                    کپی
+                </button>
+            </p>
+        </div>
+    </div>
+    <div id="copyNotification" class="fixed bottom-6 left-5 bg-gray-500 text-white py-2 px-4 rounded-lg hidden">
+        متن کپی شد!
     </div>
     <footer class="bg-gray-200 text-center p-4 mt-8">
-        <p class="text-gray-700 text-sm">این نسخه 0.0.0 است. برای اطلاع از به‌روزرسانی‌ها در کانال تلگرام <a href="https://t.me/baladam_baladam">بلدم بلدم</a> عضو شوید.</p>
+        <p class="text-gray-700 text-sm">این نسخه 0.0.1 است. برای اطلاع از به‌روزرسانی‌ها در کانال تلگرام <a href="https://t.me/baladam_baladam">بلدم بلدم</a> عضو شوید.</p>
+        <p class="text-gray-700 text-sm"><a href="history.html">تاریخچه تغییرات را اینجا بخوانید</a></p>
     </footer>
     
     
