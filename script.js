@@ -1,3 +1,40 @@
+function showCopyNotification() {
+    const notification = document.getElementById('copyNotification');
+    notification.classList.remove('hidden'); // Show the notification
+
+    // Hide the notification after 3 seconds
+    setTimeout(() => {
+        notification.classList.add('hidden');
+    }, 3000);
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    const copyInTextReferenceBtn = document.getElementById('copyInTextReference');
+    const copyFinalReferenceBtn = document.getElementById('copyFinalReference');
+
+    copyInTextReferenceBtn.addEventListener('click', function() {
+        const inTextReference = document.getElementById('inTextReferenceOutput').textContent;
+        if (inTextReference) {
+            navigator.clipboard.writeText(inTextReference).then(() => {
+                showCopyNotification();
+            }).catch(err => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    });
+
+    copyFinalReferenceBtn.addEventListener('click', function() {
+        const finalReference = document.getElementById('finalReferenceOutput').textContent;
+        if (finalReference) {
+            navigator.clipboard.writeText(finalReference).then(() => {
+                showCopyNotification();
+            }).catch(err => {
+                console.error('Error copying text: ', err);
+            });
+        }
+    });
+});
+
 document.getElementById('documentType').addEventListener('change', function() {
     // Hide all fields initially
     document.querySelectorAll('div[id$="Fields"]').forEach(function(section) {
@@ -21,24 +58,26 @@ function generateReference() {
     const year = document.querySelector(`#${type}Fields [name="year"]`)?.value;
     const additionalInfo = document.querySelector(`#${type}Fields [name="location"]`)?.value || document.querySelector(`#${type}Fields [name="journalName"]`)?.value || document.querySelector(`#${type}Fields [name="websiteName"]`)?.value || document.querySelector(`#${type}Fields [name="university"]`)?.value || document.querySelector(`#${type}Fields [name="conferenceName"]`)?.value;
     const url = document.querySelector(`#${type}Fields [name="url"]`)?.value;
-    const publishDate = document.querySelector(`#${type}Fields [name="publishDate"]`)?.value;
-    
+    const publishDate = document.querySelector(`#${type}Fields [name="publishDate"]`)?.value;    
 
     switch (type) {
         case 'book':
             const publisher = document.querySelector('#bookFields [name="publisher"]')?.value;
-            reference = `${authorLastName}، ${authorFirstName}. (${year}). ${title}. ${additionalInfo}: ${publisher}.`;
+            reference = `${authorLastName}، ${authorFirstName} (${year}). ${title}. ${additionalInfo}: ${publisher}.`;
             break;
         case 'journalArticle':
             const volumeIssue = document.querySelector('#journalArticleFields [name="volumeIssue"]')?.value;
-            const yearPages = document.querySelector('#journalArticleFields [name="yearPages"]')?.value;
-            reference = `${authorLastName}، ${authorFirstName}. (${year}). ${title}. ${additionalInfo}, ${volumeIssue}, ${yearPages}.`;
+            const pages = document.querySelector('#journalArticleFields [name="pages"]')?.value;
+            reference = `${authorLastName}، ${authorFirstName} (${year}). ${title}. ${additionalInfo}، ${volumeIssue}، ${pages}.`;
             break;
         case 'website':
-            reference = `${authorLastName}، ${authorFirstName}. (${publishDate}). ${title}. ${additionalInfo}. Retrieved from ${url}`;
+            const pageTitle = document.querySelector('#websiteFields [name="pageTitle"]')?.value;
+            reference = `${authorLastName}، ${authorFirstName} (${publishDate}). ${pageTitle}. ${additionalInfo}. بازیابی‌شده از:  ${url}`;
             break;
         case 'dissertation':
-            reference = `${authorLastName}، ${authorFirstName}. (${year}). ${title}. (Doctoral dissertation). ${additionalInfo}.`;
+            const dissertationType = document.getElementById('dissertationType').value;
+            let typeText = dissertationType === 'masterThesis' ? 'پایان‌نامه کارشناسی ارشد' : 'رساله دکتری';
+            reference = `${authorLastName}، ${authorFirstName}. (${year}). ${title}. ${typeText}. ${additionalInfo}.`;
             break;
         case 'conferencePaper':
             const dateLocation = document.querySelector('#conferencePaperFields [name="date"]')?.value + ', ' + additionalInfo;
@@ -46,22 +85,11 @@ function generateReference() {
             break;
     }
 
-    document.getElementById('referenceOutput').textContent = reference;
+    let inTextReference = `(${authorLastName}، ${year})`;
+
+    document.getElementById('finalReferenceOutput').textContent = reference;
+    document.getElementById('inTextReferenceOutput').textContent = inTextReference;
+    document.getElementById('referenceOutput').classList.remove('hidden');
 }
 
 document.getElementById('generateButton').addEventListener('click', generateReference);
-
-document.getElementById('copyButton').addEventListener('click', function() {
-    const referenceText = document.getElementById('referenceOutput').textContent;
-    if (!referenceText) {
-        alert('هیچ مرجعی برای کپی وجود ندارد.');
-        return;
-    }
-
-    // Copy referenceText to clipboard
-    navigator.clipboard.writeText(referenceText).then(function() {
-        alert('مرجع با موفقیت کپی شد.');
-    }).catch(function(error) {
-        alert('خطا هنگام کپی: ', error);
-    });
-});
