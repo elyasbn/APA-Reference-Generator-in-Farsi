@@ -1,133 +1,198 @@
 <!DOCTYPE html>
 <html lang="fa" dir="rtl">
+
 <head>
     <meta charset="UTF-8">
     <title>APA Reference Generator in Farsi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Vazir:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <style>
         body {
-            font-family: 'Vazir', sans-serif;
+            font-family: 'Vazirmatn', sans-serif;
         }
     </style>
 </head>
-<body class="flex flex-col min-h-screen">
-    <div class="flex-grow mr-5">
-        <h1 class="text-xl font-bold my-4"> ‌مرجع‌ساز APA</h1>
-        <div>
-            <label for="documentType" class="block mb-2">نوع سند:</label>
-            <select id="documentType" class="mb-4 p-2 border rounded">
-                <option value="default">انتخاب کنید</option>
-                <option value="book">کتاب</option>
-                <option value="journalArticle">مقاله ژورنال</option>
-                <option value="conferencePaper">مقاله کنفرانس</option>
-                <option value="website">وب‌سایت</option>
-                <option value="dissertation">پایان‌نامه و رساله</option>
-            </select>
-        </div>
-        <form id="referenceForm" class="mb-4">
-            <!-- Book Fields -->
-            <div id="bookFields" class="hidden">
-                <label>نام نویسنده:</label>
-                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
-                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
-                <label>عنوان کتاب:</label>
-                <input type="text" name="title" class="mb-4 p-2 border rounded block">
-                <label>سال انتشار:</label>
-                <input type="text" name="year" class="mb-4 p-2 border rounded block">
-                <label>محل انتشار:</label>
-                <input type="text" name="location" class="mb-4 p-2 border rounded block">
-                <label>ناشر:</label>
-                <input type="text" name="publisher" class="mb-4 p-2 border rounded block">
+
+<body>
+    <div  class="flex min-h-screen bg-gray-100">
+        <div class="flex-1 mr-5 px-4 py-8 md:px-10 lg:px-20 xl:px-32">
+            <h1 class="text-3xl md:text-4xl lg:text-5xl font-bold my-4"> ‌مرجع‌ساز APA</h1>
+            <div>
+                <label for="documentType" class="block mb-2">نوع سند:</label>
+                <select id="documentType" class="mb-4 p-2 border rounded w-full">
+                    <option value="default">انتخاب کنید</option>
+                    <option value="book">کتاب</option>
+                    <option value="journalArticle">مقاله ژورنال</option>
+                    <option value="conferencePaper">مقاله کنفرانس</option>
+                    <option value="website">وب‌سایت</option>
+                    <option value="dissertation">پایان‌نامه و رساله</option>
+                </select>
             </div>
-            <!-- Journal Article Fields -->
-            <div id="journalArticleFields" class="hidden">
-                <label>نام نویسنده:</label>
-                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
-                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
-                <label>سال انتشار:</label>
-                <input type="text" name="year" class="mb-4 p-2 border rounded block">
-                <label>عنوان مقاله:</label>
-                <input type="text" name="articleTitle" class="mb-4 p-2 border rounded block">
-                <label>نام ژورنال:</label>
-                <input type="text" name="journalName" class="mb-4 p-2 border rounded block">
-                <label>شماره ژورنال:</label>
-                <input type="text" name="volumeIssue" class="mb-4 p-2 border rounded block">
-                <label>صفحات:</label>
-                <input type="text" name="pages" class="mb-4 p-2 border rounded block">
-            </div>
-            <!-- Website Fields -->
-            <div id="websiteFields" class="hidden">
-                <label>نام نویسنده:</label>
-                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
-                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
-                <label>عنوان صفحه:</label>
-                <input type="text" name="pageTitle" class="mb-4 p-2 border rounded block">
-                <label>نام وب‌سایت:</label>
-                <input type="text" name="websiteName" class="mb-4 p-2 border rounded block">
-                <label>تاریخ انتشار:</label>
-                <input type="text" name="publishDate" class="mb-4 p-2 border rounded block">
-                <label>URL:</label>
-                <input type="text" name="url" class="mb-4 p-2 border rounded block">
-            </div>
-            <!-- Dissertation Fields -->
-            <div id="dissertationFields" class="hidden">
-                <label>نام نویسنده:</label>
-                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
-                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
-                <label>عنوان پایان‌نامه یا رساله:</label>
-                <input type="text" name="thesisTitle" class="mb-4 p-2 border rounded block">
-                <div>
-                    <label for="dissertationType">نوع:</label>
-                    <select id="dissertationType" name="dissertationType">
-                        <option value="masterThesis">پایان‌نامه کارشناسی ارشد</option>
-                        <option value="doctoralDissertation">رساله دکتری</option>
-                    </select>
+            <form id="referenceForm" class="mb-4">
+                <div id="bookFields" class="hidden">
+                    <label>نویسندگان:</label>
+                    <div id="authorInputs">
+                        <div class="author-input">
+                            <input type="text" name="authorFirstName[]" class="mb-2 p-2 border rounded block w-full"
+                                placeholder="نام">
+                            <input type="text" name="authorLastName[]" class="mb-4 p-2 border rounded block w-full"
+                                placeholder="نام خانوادگی">
+                        </div>
+                    </div>
+                    <button type="button" id="addAuthorBtn" class="p-2 bg-blue-200 rounded">افزودن
+                        مشارکت‌کننده</button><br />
+                    <label>عنوان کتاب:</label>
+                    <input type="text" name="title" class="mb-4 p-2 border rounded block w-full">
+                    <label>سال انتشار:</label>
+                    <input type="text" name="year" class="mb-4 p-2 border rounded block w-full">
+                    <label>محل انتشار:</label>
+                    <input type="text" name="location" class="mb-4 p-2 border rounded block w-full">
+                    <label>ناشر:</label>
+                    <input type="text" name="publisher" class="mb-4 p-2 border rounded block w-full">
                 </div>
-                <label>سال انتشار:</label>
-                <input type="text" name="year" class="mb-4 p-2 border rounded block">
-                <label>دانشگاه:</label>
-                <input type="text" name="university" class="mb-4 p-2 border rounded block">
+                <div id="journalArticleFields" class="hidden">
+                    <label>نویسندگان:</label>
+                    <div id="authorInputs">
+                        <div class="author-input">
+                            <input type="text" name="authorFirstName[]" class="mb-2 p-2 border rounded block w-full"
+                                placeholder="نام">
+                            <input type="text" name="authorLastName[]" class="mb-4 p-2 border rounded block w-full"
+                                placeholder="نام خانوادگی">
+                        </div>
+                    </div>
+                    <button type="button" id="addAuthorBtn" class="p-2 bg-blue-200 rounded">افزودن
+                        مشارکت‌کننده</button><br />
+                    <label>سال انتشار:</label>
+                    <input type="text" name="year" class="mb-4 p-2 border rounded block w-full">
+                    <label>عنوان مقاله:</label>
+                    <input type="text" name="articleTitle" class="mb-4 p-2 border rounded block w-full">
+                    <label>نام ژورنال:</label>
+                    <input type="text" name="journalName" class="mb-4 p-2 border rounded block w-full">
+                    <label>شماره دوره:</label>
+                    <input type="text" name="volume" class="mb-4 p-2 border rounded block w-full">
+                    <label>شماره پیاپی:</label>
+                    <input type="text" name="issue" class="mb-4 p-2 border rounded block w-full">
+                    <label>صفحه شروع:</label>
+                    <input type="text" name="startPage" class="mb-4 p-2 border rounded block w-full">
+                    <label>صفحه پایان:</label>
+                    <input type="text" name="endPage" class="mb-4 p-2 border rounded block w-full">
+                </div>
+                <div id="websiteFields" class="hidden">
+                    <label>نویسندگان:</label>
+                    <div id="authorInputs">
+                        <div class="author-input">
+                            <input type="text" name="authorFirstName[]" class="mb-2 p-2 border rounded block w-full"
+                                placeholder="نام">
+                            <input type="text" name="authorLastName[]" class="mb-4 p-2 border rounded block w-full"
+                                placeholder="نام خانوادگی">
+                        </div>
+                    </div>
+                    <button type="button" id="addAuthorBtn" class="p-2 bg-blue-200 rounded">افزودن
+                        مشارکت‌کننده</button><br />
+                    <label>عنوان صفحه:</label>
+                    <input type="text" name="pageTitle" class="mb-4 p-2 border rounded block w-full">
+                    <label>نام وب‌سایت:</label>
+                    <input type="text" name="websiteName" class="mb-4 p-2 border rounded block w-full">
+                    <label>تاریخ انتشار:</label>
+                    <input type="text" name="publishDate" class="mb-4 p-2 border rounded block w-full">
+                    <label>URL:</label>
+                    <input type="text" name="url" class="mb-4 p-2 border rounded block w-full">
+                </div>
+                <div id="dissertationFields" class="hidden">
+                    <label>نویسندگان:</label>
+                    <div id="authorInputs">
+                        <div class="author-input">
+                            <input type="text" name="authorFirstName[]" class="mb-2 p-2 border rounded block w-full"
+                                placeholder="نام">
+                            <input type="text" name="authorLastName[]" class="mb-4 p-2 border rounded block w-full"
+                                placeholder="نام خانوادگی">
+                        </div>
+                    </div>
+                    <button type="button" id="addAuthorBtn" class="p-2 bg-blue-200 rounded">افزودن
+                        مشارکت‌کننده</button><br />
+                    <label>عنوان پایان‌نامه یا رساله:</label>
+                    <input type="text" name="thesisTitle" class="mb-4 p-2 border rounded block w-full">
+                    <div class="w-full">
+                        <label for="dissertationType">نوع:</label>
+                        <select id="dissertationType" name="dissertationType">
+                            <option value="masterThesis">پایان‌نامه کارشناسی ارشد</option>
+                            <option value="doctoralDissertation">رساله دکتری</option>
+                        </select>
+                    </div>
+                    <label>سال انتشار:</label>
+                    <input type="text" name="year" class="mb-4 p-2 border rounded block w-full">
+                    <label>دانشگاه:</label>
+                    <input type="text" name="university" class="mb-4 p-2 border rounded block w-full">
+                </div>
+                <div id="conferencePaperFields" class="hidden">
+                    <label>نویسندگان:</label>
+                    <div id="authorInputs">
+                        <div class="author-input">
+                            <input type="text" name="authorFirstName[]" class="mb-2 p-2 border rounded block w-full"
+                                placeholder="نام">
+                            <input type="text" name="authorLastName[]" class="mb-4 p-2 border rounded block w-full"
+                                placeholder="نام خانوادگی">
+                        </div>
+                    </div>
+                    <button type="button" id="addAuthorBtn" class="p-2 bg-blue-200 rounded">افزودن
+                        مشارکت‌کننده</button><br />
+                    <label>عنوان مقاله:</label>
+                    <input type="text" name="paperTitle" class="mb-4 p-2 border rounded block w-full">
+                    <div id="conferenceYearFields" class="hidden">
+                        <label>سال:</label>
+                        <input type="text" name="conferenceYear" class="mb-4 p-2 border rounded block">
+                    </div>
+                    <label>نام کنفرانس:</label>
+                    <input type="text" name="conferenceName" class="mb-4 p-2 border rounded block w-full">
+                    <label>مکان برگزاری:</label>
+                    <input type="text" name="location" class="mb-4 p-2 border rounded block w-full">
+                    <label>تاریخ برگزاری:</label>
+                    <input type="text" name="date" class="mb-4 p-2 border rounded block w-full">
+                </div>
+                <button id="generateButton" type="button" class="p-2 bg-blue-500 text-white rounded">ایجاد مرجع</button>
+            </form>
+        </div>
+        <div class="flex-1 px-4 py-8 md:px-10 lg:px-20 xl:px-32">
+            <div id="referenceOutput" class="hidden bg-white px-6 py-2 shadow-xl">
+                <p><strong>ارجاع درون‌متنی:</strong> <span id="inTextReferenceOutput"></span>
+                    <button id="copyInTextReference"
+                        class="ml-2 hover:text-blue-200 text-blue-500 font-bold py-2 px-2 rounded">
+                        کپی
+                    </button>
+                </p>
+                <p><strong>ارجاع پایانی:</strong> <span id="finalReferenceOutput"></span>
+                    <button id="copyFinalReference"
+                        class="ml-2 hover:text-blue-200 text-blue-500 font-bold py-2 px-2 rounded">
+                        کپی
+                    </button>
+                </p>
             </div>
-            <!-- Conference Paper Fields -->
-            <div id="conferencePaperFields" class="hidden">
-                <label>نام نویسنده:</label>
-                <input type="text" name="authorFirstName" class="mb-2 p-2 border rounded block" placeholder="نام">
-                <input type="text" name="authorLastName" class="mb-4 p-2 border rounded block" placeholder="نام خانوادگی">
-                <label>عنوان مقاله:</label>
-                <input type="text" name="paperTitle" class="mb-4 p-2 border rounded block">
-                <label>نام کنفرانس:</label>
-                <input type="text" name="conferenceName" class="mb-4 p-2 border rounded block">
-                <label>مکان برگزاری:</label>
-                <input type="text" name="location" class="mb-4 p-2 border rounded block">
-                <label>تاریخ برگزاری:</label>
-                <input type="text" name="date" class="mb-4 p-2 border rounded block">
-            </div>
-            <button id="generateButton" type="button" class="p-2 bg-blue-500 text-white rounded">ایجاد مرجع</button>
-        </form>
-        <div id="referenceOutput" class="hidden">
-            <p><strong>ارجاع درون‌متنی:</strong> <span id="inTextReferenceOutput"></span>
-                <button id="copyInTextReference" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
-                    کپی
-                </button>
-            </p>
-            <p><strong>ارجاع پایانی:</strong> <span id="finalReferenceOutput"></span>
-                <button id="copyFinalReference" class="ml-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded">
-                    کپی
-                </button>
-            </p>
+            <h2 class="text-2xl md:text-3xl lg:text-4xl font-bold my-2">تاریخچه</h2>
+            <p class="text-gray-400 text-xs text-justify leading-5 mt-3">هشدار: در حال حاضر تاریخچه تنها بر روی مرورگر شما ذخیره می‌شود و با تغییر مرورگر یا پاک‌کردن کش‌های آن، این تاریخچه دیگر در دسترس نخواهد بود. در نسخه‌های بعدی امکان ذخیره تاریخچه در حساب کاربری نیز فراهم می‌شود.</p>
+            <table class="border-collapse w-full mt-4 bg-white shadow-xl">
+                <thead>
+                    <tr>
+                        <th class="border border-gray-200 px-4 py-2">مرجع</th>
+                        <th class="border border-gray-200 px-4 py-2">عملیات</th>
+                    </tr>
+                </thead>
+                <tbody id="savedCitationsTableBody"></tbody>
+            </table>
         </div>
     </div>
     <div id="copyNotification" class="fixed bottom-6 left-5 bg-gray-500 text-white py-2 px-4 rounded-lg hidden">
         متن کپی شد!
     </div>
-    <footer class="bg-gray-200 text-center p-4 mt-8">
-        <p class="text-gray-700 text-sm">این نسخه 0.0.1 است. برای اطلاع از به‌روزرسانی‌ها در کانال تلگرام <a href="https://t.me/baladam_baladam">بلدم بلدم</a> عضو شوید.</p>
-        <p class="text-gray-700 text-sm"><a href="history.html">تاریخچه تغییرات را اینجا بخوانید</a></p>
+    <footer class="bg-gray-200 text-center p-4">
+        <p class="text-gray-700 text-sm">این نسخه 0.0.2 است. برای اطلاع از به‌روزرسانی‌ها در کانال تلگرام <a class="text-blue-600"
+                href="https://t.me/baladam_baladam">بلدم‌بلدم</a> عضو شوید.</p>
+        <p class="text-gray-700 text-sm"><a class="text-blue-600" href="history.html">تاریخچه تغییرات را اینجا بخوانید</a></p>
+        <p class="text-sm">طراحی و توسعه: الیاس براهوئی‌نژاد</p>
     </footer>
-    
-    
+
+
 
     <script src="script.js"></script>
 </body>
+
 </html>
